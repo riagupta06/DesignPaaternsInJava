@@ -58,16 +58,8 @@ public class Employee {
         }
         public Employee build() {
             Employee employee = new Employee(this);
-            /* We can also add object validation as per our requirement
-            validateEmployeeObject(employee);
-            */
             return employee;
         }
-
-        private void validateEmployeeObject(Employee employee) {
-            //custom logic
-        }
-
     }
 
 }
