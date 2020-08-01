@@ -6,7 +6,7 @@ _Builder Design Pattern_ is one of the commonly used design patterns. It falls u
 
 ### Analogy
 
-As the name suggests,Builder Design Pattern is used to build objects.
+As the name suggests, Builder Design Pattern is used to build objects.
 
 Mainly it is used to create complex object by _using step by step approach_ and final step will return the _object in complete state_. Same construction process is used to create different representations of a complex object. This helps to make the _object construction process generic_.
 
