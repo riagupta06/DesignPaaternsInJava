@@ -14,9 +14,9 @@ Class does not directly create an object itself directly but delegates object cr
 
 ## **Need**  **for Builder Design Pattern**
 
-Let&#39;s consider a case where we have entity that contains a lot of attributes
+Let&#39;s consider a case where we have entity that contains a lot of attributes.
 
-1. In case of too many parameters of a single object, some may be optional and some required. In that case we would require to create multiple constructors (constructor overloading).
+1. In case of too many parameters of a single object where some may be optional and some required. In that case we would require to create multiple constructors (constructor overloading).
 2. Or we would be forced to send NULL for optional, not required parameters.
 3. Also, in case of same types of parameters, we would need to maintain order of parameters.
 
@@ -31,9 +31,9 @@ Let&#39;s consider a case where we have entity that contains a lot of attributes
 3. Copy all the attributes from outer class to builder class.
 4. Add methods in Builder class for each attribute to set on builder object and return the same builder object i.e. each of these methods are enriching the builder object with newer attribute. These method names need not follow setter methods rules, names could be verbose.
 5. We could add little optimization here by adding the constructor in builder class for required attributes and individual methods for optional attributes. (do this optimization if you feel required attributes list would never change, otherwise not a necessary step).
-6. Final step in object creation would be to add a build method in builder class that would actually call the private constructor of outer class to create an object. For this, we would need to add a _private constructor in the outer entity class_ that accepts Builder object to construct the final entity object. Private constructor would ensure that object is created through this builder only.
+6. Final step in object creation would be to add a build method in builder class that would actually call the private constructor of outer class to create an object. For this, we would need to add a _private constructor in the outer entity class_ that accepts Builder object to construct the final entity object. Private constructor would ensure that the object is created through this builder only.
 7. Make sure _not to add any setter methods_ in outer class. It will defeat the purpose of creating an immutable object.
-8. Finally we would create a client class that uses the static inner Builder class to first create its object and calls different methods to enrich the builder and in the end calls build() which actually returns the required entity object. We notice that the object creation is chained method call where each call is returning the builder object itself though we get final object on call of build().
+8. Finally, we would create a client class that uses the static inner Builder class to first create its object and calls different methods to enrich the builder and in the end calls build() which actually returns the required entity object. We notice that the object creation is a chained method call where each call is returning the builder object itself though we get the final object on call of build().
 
 ### Code Example
 
