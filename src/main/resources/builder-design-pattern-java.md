@@ -1,28 +1,46 @@
-# Builder Design Pattern in Java
+---
+author: riagupta
+title: Builder Design Pattern In Java
+description: Builder Design Pattern In Java
+date: 2020-08-01
+categories:
+  - "Java"
+tags:
+  - "Java Design Pattern"
+authors:
+  - "Ria Gupta"
+# Theme-Defined params
+comments: true # Enable Disqus comments for specific page
+authorbox: true # Enable authorbox for specific page
+toc: true # Enable Table of Contents for specific page
+mathjax: false # Enable MathJax for specific page
+socialshare: true # Enable social share links for specific page
+thumbnail: "/img/logo/java.png"
+images:
+  - "/img/logo/java.png"
+---
 
 _Builder Design Pattern_ is one of the commonly used design patterns. It falls under the category of _Creational Design Patterns_.
-
+<!--more-->
 ## Overview
 
-### Analogy
+##### Analogy
 
-As the name suggests, Builder Design Pattern is used to build objects.
+As the name suggests, **Builder Design Pattern** is used to build objects.
 
 Mainly it is used to create complex object by _using step by step approach_ and final step will return the _object in complete state_. Same construction process is used to create different representations of a complex object. This helps to make the _object construction process generic_.
 
-Class does not directly create an object itself directly but delegates object creation to its Builder.
+Class doesn't create an object itself directly but delegates object creation to its Builder.
 
-## **Need**  **for Builder Design Pattern**
+## Need for Builder Design Pattern
 
-Let&#39;s consider a case where we have entity that contains a lot of attributes.
+Let's consider a case where we have entity that contains a lot of attributes.
 
 1. In case of too many parameters of a single object where some may be optional and some required. In that case we would require to create multiple constructors (constructor overloading).
 2. Or we would be forced to send NULL for optional, not required parameters.
-3. Also, in case of same types of parameters, we would need to maintain order of parameters.
-
-    We can solve this problem by having a constructor for required attributes and setters for optional attributes. In that case, the problem would be that we would have an intermediate state of object in between during the process of building the final object i.e. till the last required setter call. This implies we would have an _inconsistent_ _state_ of theobject until the expected object is fully created. Ideally the object shouldn&#39;t be available till it is in complete state.
-
-1. So we would need a way to create objects in complete state i.e. without the setters. This would ensure the immutability of the final object that is built. _Immutability_ is the key of builder design pattern.
+3. Also, in case of same types of parameters, we would need to maintain order of parameters.  
+    We can solve this problem by having a constructor for required attributes and setters for optional attributes. In that case, the problem would be that we would have an intermediate state of object in between during the process of building the final object i.e. till the last required setter call. This implies we would have an _inconsistent_ _state_ of theobject until the expected object is fully created. Ideally the object shouldn't be available till it is in complete state.
+4. So we would need a way to create objects in complete state i.e. without the setters. This would ensure the immutability of the final object that is built. _Immutability_ is the key of builder design pattern.
 
 ## How to implement Builder Design Pattern
 
@@ -35,12 +53,10 @@ Let&#39;s consider a case where we have entity that contains a lot of attributes
 7. Make sure _not to add any setter methods_ in outer class. It will defeat the purpose of creating an immutable object.
 8. Finally, we would create a client class that uses the static inner Builder class to first create its object and calls different methods to enrich the builder and in the end calls build() which actually returns the required entity object. We notice that the object creation is a chained method call where each call is returning the builder object itself though we get the final object on call of build().
 
-### Code Example
+##### Code Example
 
-- Let&#39;s create an entity class called **Employee** which would help us in creating desired objects with all required attributes and combination of optional attributes ensuring immutability.
+- Let's create an entity class called **Employee** which would help us in creating desired objects with all required attributes and combination of optional attributes ensuring immutability.
 ```java
-package com.codingnconcepts.builderdesignpattern;
-
 public class Employee {
 
     private int employeeId; //required
@@ -106,7 +122,7 @@ public class Employee {
 }
 ```
 
-- Let&#39;s create a client (Main Class) to test object creation through Builder Design Pattern
+- Let's create a client (Main Class) to test object creation through Builder Design Pattern
 ```java
 public class Client {
 
@@ -145,24 +161,23 @@ public class Client {
 }
 ```
 ```
-OUTPUT:
+{{< code_output >}}
+Employee{employeeId=112, name='Ria Gupta', phone='9876543210', alternativePhone='9988776655', address='413-3rd Avenue, Shantinagar, Banglore'}
 
-Employee{employeeId=112, name=&#39;Ria Gupta&#39;, phone=&#39;9876543210&#39;, alternativePhone=&#39;9988776655&#39;, address=&#39;413-3rd Avenue, Shantinagar, Banglore&#39;}
+Employee{employeeId=113, name='Rishabh Goyal', phone='1234567890', alternativePhone='null', address='null'}
 
-Employee{employeeId=113, name=&#39;Rishabh Goyal&#39;, phone=&#39;1234567890&#39;, alternativePhone=&#39;null&#39;, address=&#39;null&#39;}
-
-Employee{employeeId=114, name=&#39;Abhishek Bansal&#39;, phone=&#39;null&#39;, alternativePhone=&#39;null&#39;, address=&#39;null&#39;}
+Employee{employeeId=114, name='Abhishek Bansal', phone='null', alternativePhone='null', address='null'}
 
 ```
 
-## **Advantages**  **of Builder Design Pattern**
+## Advantages of Builder Design Pattern
 
 1. Reduction in multiple constructors. Only one constructor that accepts Builder object is required.
 2. There is no need to pass null for optional parameters to the constructor.
-3. Object is instantiated fully i.e. in a complete state. We always get an immutable object since we didn&#39;t provide any setter methods and hence state of object once created cannot be changed.
+3. Object is instantiated fully i.e. in a complete state. We always get an immutable object since we didn't provide any setter methods and hence state of object once created cannot be changed.
 4. Lesser error prone as user would know what they are passing in each method call. This also gives design flexibility and more readable of client code.
 
-## **Disadvantages**  **of Builder Design Pattern**
+## Disadvantages of Builder Design Pattern
 
 1. The number of lines of code gets at least double using builder pattern as we copy all the fields of entity class to builder class. Code becomes more verbose.
 2. It requires the creation of a separate builder for each type of object.
@@ -171,4 +186,4 @@ Employee{employeeId=114, name=&#39;Abhishek Bansal&#39;, phone=&#39;null&#39;, a
 
 In this article, we saw that Builder Design Pattern is a rescue where our use-case is such that we have a lot of parameters for a particular object type or we have requirement of adding new parameters may be in future. This should be used when we want to build immutable objects using theme construction process.
 
-In addition to the benefits laid above, opt for this pattern makes adding parameters easier and code becomes less error-prone and easy to read.
+In addition to the benefits said above, opt for this pattern makes adding parameters easier and code becomes less error-prone and easy to read.
